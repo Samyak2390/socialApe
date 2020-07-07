@@ -30,6 +30,7 @@ app.get("/screams", (req, res) => {
     })
     .catch((err) => console.error(err));
 });
+
 //createdAt: admin.firestore.Timestamp.fromDate(new Date()),
 app.post("/scream", (req, res) => {
   const newScream = {
@@ -51,4 +52,4 @@ app.post("/scream", (req, res) => {
     });
 });
 
-exports.api = functions.https.onRequest(app);
+exports.api = functions.region("asia-east2").https.onRequest(app);
