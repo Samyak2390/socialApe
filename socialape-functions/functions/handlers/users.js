@@ -99,6 +99,9 @@ exports.uploadImage = (req, res) => {
   let imageToBeUploaded = {};
 
   busboy.on("file", (fieldname, file, filename, encoding, mimetype) => {
+    if (mimetype !== "image/jpeg" || mimetype !== "image/png") {
+      return res.status(400).json({ error: "Wrong file type submitted" });
+    }
     const filenameArr = filename.split(".");
     const imageExtension = filenameArr[filenameArr.length - 1];
     imageFileName = `${Date.now()}.${imageExtension}`;
